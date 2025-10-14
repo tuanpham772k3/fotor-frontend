@@ -1,0 +1,30 @@
+.unit-AiArt {
+  width: 100%;
+  height: 100%;
+  margin-block: 50px;
+  margin-inline: 60px;
+  color: #fff;
+}
+
+.unit-AiArt > .effects {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+}
+
+.unit-AiArt > .effects > .header-effects {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.unit-AiArt > .effects > .header-effects > .flask-icon {
+    display: flex;
+    align-items: center;
+}
+
+.unit-AiArt > .effects > .header-effects > .title {
+    font-size: 24px;
+    font-weight: 600;
+}
