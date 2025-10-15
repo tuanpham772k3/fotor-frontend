@@ -5,7 +5,7 @@ import Image from "next/image";
 import flaskImage from "@/assets/images/flask.png";
 import "./goart.css";
 import { ChevronRight, Heart } from "lucide-react";
-import { getEffectsByCategory } from "./fakeApi";
+import { getEffectsByCategory } from "@/mocks/fakeApi";
 export default function GoArtPage() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [showPrev, setShowPrev] = useState(false);
