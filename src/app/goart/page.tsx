@@ -4,44 +4,42 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import flaskImage from "@/assets/images/flask.png";
 import "./goart.css";
-import { ChevronRight, Heart } from "lucide-react";
-import { getEffectsByCategory } from "@/mocks/fakeApi";
+import { ChevronRight } from "lucide-react";
+import GoartPageContext from "./goartPageContext";
+
+interface EffectItem {
+  _id: string;
+  title: string;
+  thumbnailUrl: string;
+  category: string;
+}
+
 export default function GoArtPage() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [showPrev, setShowPrev] = useState(false);
-  const [showNext, setShowNext] = useState(true);
-  const listRef = useRef<HTMLUListElement>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [showPreviousArrow, setShowPreviousArrow] = useState<boolean>(false);
+  const [showNextArrow, setShowNextArrow] = useState<boolean>(true);
+  const listReference = useRef<HTMLUListElement>(null);
 
-  const categories = ["Favorite", "All", "Popular", "Cartoon", "Sketch", "Watercolor", "Universal"];
-
-  // Kiểm tra vị trí scroll để ẩn/hiện nút
-  const updateArrows = () => {
-    const el = listRef.current;
-    if (!el) return;
-    setShowPrev(el.scrollLeft > 5);
-    setShowNext(el.scrollLeft < el.scrollWidth - el.clientWidth - 5);
+  const statusReactive = {
+    selectedCategory,
+    showPreviousArrow,
+    showNextArrow,
   };
-  // Chạy khi mount và khi cuộn
+
+  const context = GoartPageContext.create({
+    statusReactive,
+    listReference,
+  }).setupComponent();
+
   useEffect(() => {
-    updateArrows();
-    const el = listRef.current;
-    if (!el) return;
-    el.addEventListener("scroll", updateArrows);
-    return () => el.removeEventListener("scroll", updateArrows);
-  }, []);
-  const scroll = (dir: "left" | "right") => {
-    const el = listRef.current;
-    if (!el) return;
-    const scrollAmount = el.clientWidth * 0.6;
-    el.scrollBy({ left: dir === "left" ? -scrollAmount : scrollAmount, behavior: "smooth" });
-  };
+    const cleanup = context.attachScrollListener();
+    return cleanup;
+  }, [context]);
 
-  // Lấy danh sách các category để hiển thị khi All được chọn (loại bỏ Favorite + All)
-  const displayCategories = categories.filter((cat) => cat !== "Favorite" && cat !== "All");
-
-  // Nếu chọn All → hiển thị từng section theo danh mục
-  // Nếu chọn danh mục cụ thể → hiển thị toàn bộ ảnh của danh mục đó
-  const isAllView = selectedCategory === "All";
+  useEffect(() => {
+    setShowPreviousArrow(context.statusReactive.showPreviousArrow);
+    setShowNextArrow(context.statusReactive.showNextArrow);
+  }, [context.statusReactive.showPreviousArrow, context.statusReactive.showNextArrow]);
 
   return (
     <div className="unit-AiArt">
@@ -74,8 +72,11 @@ export default function GoArtPage() {
         {/* List Category with Arrows */}
         <div className="list-effects">
           {/* Prev Arrow */}
-          {showPrev && (
-            <div className="container container-prev" onClick={() => scroll("left")}>
+          {showPreviousArrow && (
+            <div
+              className="container container-prev"
+              onClick={() => context.scrollList({ direction: "left" })}
+            >
               <div className="arrow">
                 <ChevronRight style={{ color: "var(--text-icon-color-3)", width: "18px" }} />
               </div>
@@ -83,23 +84,29 @@ export default function GoArtPage() {
           )}
 
           {/* Next Arrow */}
-          {showNext && (
+          {showNextArrow && (
             <div className="container container-next">
-              <div className="arrow" onClick={() => scroll("right")}>
+              <div
+                className="arrow"
+                onClick={() => context.scrollList({ direction: "right" })}
+              >
                 <ChevronRight style={{ color: "var(--text-icon-color-3)", width: "18px" }} />
               </div>
             </div>
           )}
 
           {/* Category List */}
-          <ul ref={listRef} className="category">
-            {categories.map((cat) => (
+          <ul ref={listReference} className="category">
+            {context.categories.map((category: string) => (
               <li
-                key={cat}
-                className={`item ${selectedCategory === cat ? "active" : ""}`}
-                onClick={() => setSelectedCategory(cat)}
+                key={category}
+                className={`item ${selectedCategory === category ? "active" : ""}`}
+                onClick={() => {
+                  context.selectCategory({ category });
+                  setSelectedCategory(category);
+                }}
               >
-                {cat}
+                {category}
               </li>
             ))}
           </ul>
@@ -107,21 +114,26 @@ export default function GoArtPage() {
 
         {/* Phần hiển thị ảnh */}
         <div className="category-sections">
-          {isAllView ? (
+          {context.isAllCategoryView ? (
             // Nếu đang ở chế độ All → hiển thị từng danh mục (trừ All & Favorite)
-            displayCategories.map((cat) => {
-              const data = getEffectsByCategory(cat).slice(0, 6);
+            context.getAllCategoriesDisplayData().map(({ category, effects }: { category: string; effects: EffectItem[] }) => {
               return (
-                <div key={cat} className="category-block">
+                <div key={category} className="category-block">
                   <div className="category-header">
-                    <h3 className="category-title">{cat}</h3>
-                    <button className="see-all" onClick={() => setSelectedCategory(cat)}>
+                    <h3 className="category-title">{category}</h3>
+                    <button
+                      className="see-all"
+                      onClick={() => {
+                        context.selectCategory({ category });
+                        setSelectedCategory(category);
+                      }}
+                    >
                       See all
                     </button>
                   </div>
 
                   <div className="image-grid">
-                    {data.map((item) => (
+                    {effects.map((item: EffectItem) => (
                       <div key={item._id} className="effect-card">
                         <div className="image-wrapper">
                           <Image
@@ -141,31 +153,42 @@ export default function GoArtPage() {
             })
           ) : (
             // Nếu đang ở chế độ xem 1 danh mục cụ thể
-            <div className="category-block">
-              <div className="category-header">
-                <h3 className="category-title">{selectedCategory}</h3>
-                <button className="see-all" onClick={() => setSelectedCategory("All")}>
-                  Back
-                </button>
-              </div>
-
-              <div className="image-grid">
-                {getEffectsByCategory(selectedCategory).map((item) => (
-                  <div key={item._id} className="effect-card">
-                    <div className="image-wrapper">
-                      <Image
-                        src={item.thumbnailUrl}
-                        alt={item.title}
-                        width={100}
-                        height={100}
-                        className="thumb"
-                      />
-                    </div>
-                    <p className="effect-title">{item.title}</p>
+            (() => {
+              const { category, effects } = context.getSingleCategoryDisplayData();
+              return (
+                <div className="category-block">
+                  <div className="category-header">
+                    <h3 className="category-title">{category}</h3>
+                    <button
+                      className="see-all"
+                      onClick={() => {
+                        context.selectCategory({ category: "All" });
+                        setSelectedCategory("All");
+                      }}
+                    >
+                      Back
+                    </button>
                   </div>
-                ))}
-              </div>
-            </div>
+
+                  <div className="image-grid">
+                    {effects.map((item: EffectItem) => (
+                      <div key={item._id} className="effect-card">
+                        <div className="image-wrapper">
+                          <Image
+                            src={item.thumbnailUrl}
+                            alt={item.title}
+                            width={100}
+                            height={100}
+                            className="thumb"
+                          />
+                        </div>
+                        <p className="effect-title">{item.title}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()
           )}
         </div>
       </div>
