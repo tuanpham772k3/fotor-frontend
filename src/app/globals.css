@@ -23,6 +23,8 @@
   --th-bg-color-5: #ffffff;
   --th-bg-color-6: #f4f5f6;
   --th-primary-color: #2643ff;
+
+  
 }
 
 @media (prefers-color-scheme: dark) {
