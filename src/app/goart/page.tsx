@@ -6,13 +6,7 @@ import flaskImage from "@/assets/images/flask.png";
 import "./goart.css";
 import { ChevronRight } from "lucide-react";
 import GoartPageContext from "./goartPageContext";
-
-interface EffectItem {
-  _id: string;
-  title: string;
-  thumbnailUrl: string;
-  category: string;
-}
+import ImageGenre from "../components/ImageGenre/ImageGenre";
 
 export default function GoArtPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -54,8 +48,8 @@ export default function GoArtPage() {
             <Image
               src={flaskImage}
               alt="Flask icon"
-              width={24}
-              height={24}
+              width={16}
+              height={16}
               className="flask-icon"
             />
             <span className="title">AI Art Effects</span>
@@ -117,84 +111,11 @@ export default function GoArtPage() {
         </div>
 
         {/* Phần hiển thị ảnh */}
-        <div className="category-sections">
-          {context.isAllCategoryView ? (
-            // Nếu đang ở chế độ All → hiển thị từng danh mục (trừ All & Favorite)
-            context.getAllCategoriesDisplayData().map(({ category, effects }: { category: string; effects: EffectItem[] }) => {
-              return (
-                <div key={category} className="category-block">
-                  <div className="category-header">
-                    <h3 className="category-title">{category}</h3>
-                    <button
-                      className="see-all"
-                      onClick={() => {
-                        context.selectCategory({ category });
-                        setSelectedCategory(category);
-                      }}
-                    >
-                      See all
-                    </button>
-                  </div>
-
-                  <div className="image-grid">
-                    {effects.map((item: EffectItem) => (
-                      <div key={item._id} className="effect-card">
-                        <div className="image-wrapper">
-                          <Image
-                            src={item.thumbnailUrl}
-                            alt={item.title}
-                            width={100}
-                            height={100}
-                            className="thumb"
-                          />
-                        </div>
-                        <p className="effect-title">{item.title}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              );
-            })
-          ) : (
-            // Nếu đang ở chế độ xem 1 danh mục cụ thể
-            (() => {
-              const { category, effects } = context.getSingleCategoryDisplayData();
-              return (
-                <div className="category-block">
-                  <div className="category-header">
-                    <h3 className="category-title">{category}</h3>
-                    <button
-                      className="see-all"
-                      onClick={() => {
-                        context.selectCategory({ category: "All" });
-                        setSelectedCategory("All");
-                      }}
-                    >
-                      Back
-                    </button>
-                  </div>
-
-                  <div className="image-grid">
-                    {effects.map((item: EffectItem) => (
-                      <div key={item._id} className="effect-card">
-                        <div className="image-wrapper">
-                          <Image
-                            src={item.thumbnailUrl}
-                            alt={item.title}
-                            width={100}
-                            height={100}
-                            className="thumb"
-                          />
-                        </div>
-                        <p className="effect-title">{item.title}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              );
-            })()
-          )}
-        </div>
+        <ImageGenre
+          selectedCategory={selectedCategory}
+          onCategoryChange={setSelectedCategory}
+          displayCategories={context.displayCategories}
+        />
       </div>
 
       <div className="finish">
