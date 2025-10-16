@@ -20,26 +20,30 @@ export default function GoArtPage() {
   const [showNextArrow, setShowNextArrow] = useState<boolean>(true);
   const listReference = useRef<HTMLUListElement>(null);
 
-  const statusReactive = {
+  const statusReactive = useRef({
     selectedCategory,
     showPreviousArrow,
     showNextArrow,
-  };
+    setShowPreviousArrow,
+    setShowNextArrow,
+  });
 
-  const context = GoartPageContext.create({
-    statusReactive,
-    listReference,
-  }).setupComponent();
+  // Update statusReactive when state changes
+  statusReactive.current.selectedCategory = selectedCategory;
+  statusReactive.current.showPreviousArrow = showPreviousArrow;
+  statusReactive.current.showNextArrow = showNextArrow;
+
+  const context = useRef(
+    GoartPageContext.create({
+      statusReactive: statusReactive.current,
+      listReference,
+    }).setupComponent()
+  ).current;
 
   useEffect(() => {
     const cleanup = context.attachScrollListener();
     return cleanup;
   }, [context]);
-
-  useEffect(() => {
-    setShowPreviousArrow(context.statusReactive.showPreviousArrow);
-    setShowNextArrow(context.statusReactive.showNextArrow);
-  }, [context.statusReactive.showPreviousArrow, context.statusReactive.showNextArrow]);
 
   return (
     <div className="unit-AiArt">
