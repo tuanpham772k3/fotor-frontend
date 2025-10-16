@@ -1,5 +1,3 @@
-import { getEffectsByCategory } from "@/mocks/fakeApi";
-
 interface GoartPageStatusReactive {
   selectedCategory: string;
   showPreviousArrow: boolean;
@@ -13,27 +11,14 @@ interface GoartPageContextParams {
   listReference: React.RefObject<HTMLUListElement | null>;
 }
 
-interface EffectItem {
-  _id: string;
-  title: string;
-  thumbnailUrl: string;
-  category: string;
-}
-
-interface CategoryDisplayData {
-  category: string;
-  effects: EffectItem[];
-}
-
 /**
  * Context class for managing GoArt page functionality.
- * Handles category selection, scroll behavior, and effect display logic.
+ * Handles category navigation and scroll behavior for category list.
  */
 export default class GoartPageContext {
   // Scroll behavior constants
   private static readonly SCROLL_THRESHOLD_PIXELS = 5;
   private static readonly SCROLL_DISTANCE_PERCENTAGE = 0.6;
-  private static readonly EFFECTS_PREVIEW_LIMIT = 6;
   
   // Category constants
   private static readonly SPECIAL_CATEGORIES = ["Favorite", "All"] as const;
@@ -124,15 +109,6 @@ export default class GoartPageContext {
    */
   isSpecialCategory({ category }: { category: string }): boolean {
     return (GoartPageContext.SPECIAL_CATEGORIES as readonly string[]).includes(category);
-  }
-
-  /**
-   * Check if current view is "All" category view.
-   *
-   * @returns True if "All" category is selected.
-   */
-  get isAllCategoryView(): boolean {
-    return this.statusReactive.selectedCategory === "All";
   }
 
   /**
@@ -283,54 +259,6 @@ export default class GoartPageContext {
    */
   selectCategory({ category }: { category: string }): void {
     this.statusReactive.selectedCategory = category;
-  }
-
-  /**
-   * Get effects by category with optional limit.
-   *
-   * @param params - Parameters for this method.
-   * @returns List of effects for the category.
-   */
-  getEffectsByCategory({ category, limit }: { category: string; limit?: number }): EffectItem[] {
-    const effects = getEffectsByCategory(category) as EffectItem[];
-
-    if (!limit) {
-      return effects;
-    }
-
-    return effects.slice(0, limit);
-  }
-
-  /**
-   * Get display data for all categories view.
-   * Returns limited effects for each category.
-   *
-   * @returns Display data for all categories.
-   */
-  getAllCategoriesDisplayData(): CategoryDisplayData[] {
-    return this.displayCategories.map((category: string) => {
-      return {
-        category,
-        effects: this.getEffectsByCategory({ 
-          category, 
-          limit: GoartPageContext.EFFECTS_PREVIEW_LIMIT 
-        }),
-      };
-    });
-  }
-
-  /**
-   * Get display data for single category view.
-   *
-   * @returns Display data for selected category.
-   */
-  getSingleCategoryDisplayData(): CategoryDisplayData {
-    return {
-      category: this.statusReactive.selectedCategory,
-      effects: this.getEffectsByCategory({
-        category: this.statusReactive.selectedCategory,
-      }),
-    };
   }
 }
 
