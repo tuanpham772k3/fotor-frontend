@@ -197,7 +197,9 @@ export default function GoArtPage() {
         </div>
       </div>
 
-      <div className="finish"></div>
+      <div className="finish">
+        abc
+      </div>
     </div>
   );
 }
