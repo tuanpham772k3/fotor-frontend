@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useMemo } from "react";
 import Image from "next/image";
 import ImageGenreContext from "./ImageGenreContext";
 import "./ImageGenre.css";
@@ -27,18 +27,15 @@ export default function ImageGenre({
     onCategoryChange,
     displayCategories,
 }: ImageGenreProps) {
-    const context = useRef(
-        ImageGenreContext.create({
-            selectedCategory,
-            onCategoryChange,
-            displayCategories,
-        }).setupComponent()
-    ).current;
-
-    // Update context when props change
-    context.selectedCategory = selectedCategory;
-    context.onCategoryChange = onCategoryChange;
-    context.displayCategories = displayCategories;
+    const context = useMemo(
+        () =>
+            ImageGenreContext.create({
+                selectedCategory,
+                onCategoryChange,
+                displayCategories,
+            }).setupComponent(),
+        [selectedCategory, onCategoryChange, displayCategories]
+    );
 
     return (
         <div className="unit-image-genre">
@@ -67,9 +64,10 @@ export default function ImageGenre({
                                                 <Image
                                                     src={item.thumbnailUrl}
                                                     alt={item.title}
-                                                    width={100}
-                                                    height={100}
+                                                    width={60}
+                                                    height={60}
                                                     className="thumb"
+                                                    unoptimized
                                                 />
                                             </div>
                                             <p className="effect-title">{item.title}</p>
@@ -104,9 +102,10 @@ export default function ImageGenre({
                                                 <Image
                                                     src={item.thumbnailUrl}
                                                     alt={item.title}
-                                                    width={100}
-                                                    height={100}
+                                                    width={60}
+                                                    height={60}
                                                     className="thumb"
+                                                    unoptimized
                                                 />
                                             </div>
                                             <p className="effect-title">{item.title}</p>
