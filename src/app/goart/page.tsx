@@ -22,22 +22,26 @@ export default function GoArtPage() {
     setShowNextArrow,
   });
 
-  // Update statusReactive when state changes
-  statusReactive.current.selectedCategory = selectedCategory;
-  statusReactive.current.showPreviousArrow = showPreviousArrow;
-  statusReactive.current.showNextArrow = showNextArrow;
+  const context = useRef<ReturnType<typeof GoartPageContext.create> | null>(null);
 
-  const context = useRef(
-    GoartPageContext.create({
+  if (context.current === null) {
+    context.current = GoartPageContext.create({
       statusReactive: statusReactive.current,
       listReference,
-    }).setupComponent()
-  ).current;
+    }).setupComponent();
+  }
 
   useEffect(() => {
-    const cleanup = context.attachScrollListener();
+    // Update statusReactive when state changes
+    statusReactive.current.selectedCategory = selectedCategory;
+    statusReactive.current.showPreviousArrow = showPreviousArrow;
+    statusReactive.current.showNextArrow = showNextArrow;
+  }, [selectedCategory, showPreviousArrow, showNextArrow]);
+
+  useEffect(() => {
+    const cleanup = context.current?.attachScrollListener();
     return cleanup;
-  }, [context]);
+  }, []);
 
   return (
     <div className="unit-AiArt">
@@ -60,8 +64,6 @@ export default function GoArtPage() {
         <div className="search-effect">
           <input
             type="text"
-            name=""
-            id=""
             placeholder="Tìm kiếm hiệu ứng"
             className="search-input"
           />
@@ -70,37 +72,35 @@ export default function GoArtPage() {
         {/* List Category with Arrows */}
         <div className="list-effects">
           {/* Prev Arrow */}
-          {showPreviousArrow && (
-            <div
-              className="container container-prev"
-              onClick={() => context.scrollList({ direction: "left" })}
-            >
-              <div className="arrow">
-                <ChevronRight style={{ color: "var(--text-icon-color-3)", width: "18px" }} />
-              </div>
+          <div
+            className={`container container-prev ${!showPreviousArrow ? "hidden" : ""}`}
+            onClick={() => context.current?.scrollList({ direction: "left" })}
+          >
+            <div className="arrow">
+              <ChevronRight style={{ color: "var(--text-icon-color-3)", width: "18px" }} />
             </div>
-          )}
+          </div>
 
           {/* Next Arrow */}
-          {showNextArrow && (
-            <div className="container container-next">
-              <div
-                className="arrow"
-                onClick={() => context.scrollList({ direction: "right" })}
-              >
-                <ChevronRight style={{ color: "var(--text-icon-color-3)", width: "18px" }} />
-              </div>
+          <div
+            className={`container container-next ${!showNextArrow ? "hidden" : ""}`}
+          >
+            <div
+              className="arrow"
+              onClick={() => context.current?.scrollList({ direction: "right" })}
+            >
+              <ChevronRight style={{ color: "var(--text-icon-color-3)", width: "18px" }} />
             </div>
-          )}
+          </div>
 
           {/* Category List */}
           <ul ref={listReference} className="category">
-            {context.categories.map((category: string) => (
+            {context.current?.categories.map((category: string) => (
               <li
                 key={category}
                 className={`item ${selectedCategory === category ? "active" : ""}`}
                 onClick={() => {
-                  context.selectCategory({ category });
+                  context.current?.selectCategory({ category });
                   setSelectedCategory(category);
                 }}
               >
@@ -114,7 +114,7 @@ export default function GoArtPage() {
         <ImageGenre
           selectedCategory={selectedCategory}
           onCategoryChange={setSelectedCategory}
-          displayCategories={context.displayCategories}
+          displayCategories={context.current?.displayCategories ?? []}
         />
       </div>
 
