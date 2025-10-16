@@ -1,21 +1,27 @@
 .unit-AiArt {
-  max-width: 360px;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+
   color: #fff;
   background-color: #0f0f10;
+
+  padding-block-start: 50px;
+  padding-inline: 50px;
+
+  display: flex;
 }
 
 .unit-AiArt > .effects {
+  background-color: #868686;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
-/* start - header */
 .unit-AiArt > .effects > .header-effects {
   margin: 16px 16px 0;
 }
+
 .unit-AiArt > .effects > .header-effects > .header {
   display: flex;
   align-items: center;
@@ -36,9 +42,7 @@
   line-height: 20px;
   letter-spacing: 0;
 }
-/* end -header */
 
-/* start - search */
 .unit-AiArt > .effects > .search-effect {
   width: 100%;
   padding: 16px 16px 8px;
@@ -58,9 +62,7 @@
 .unit-AiArt > .effects > .search-effect > .search-input:hover {
   background: rgba(0, 0, 0, 0.8);
 }
-/* end - search */
 
-/* start - list category */
 .unit-AiArt > .effects > .list-effects {
   position: relative;
   padding: 0 16px;
@@ -68,7 +70,6 @@
   overflow-x: hidden;
 }
 
-/* continer-arrow */
 .unit-AiArt > .effects > .list-effects > .container {
   height: 100%;
   width: 24px;
@@ -85,6 +86,7 @@
   left: 16px;
   transform: rotate(180deg) translateY(50%);
 }
+
 .unit-AiArt > .effects > .list-effects > .container-next {
   right: 16px;
 }
@@ -101,7 +103,6 @@
   background-color: rgb(19, 18, 18);
 }
 
-/* category */
 .unit-AiArt > .effects > .list-effects > .category {
   display: flex;
   flex-direction: row;
@@ -135,17 +136,15 @@
   color: var(--th-primary-color);
   border: 1px solid var(--th-primary-color);
 }
-/* end - list category */
 
-/* start - category section - Phần hiển thị ảnh hiệu ứng*/
 .category-sections {
   display: flex;
   flex-direction: column;
   gap: 32px;
   padding: 0 16px 40px;
-  max-height: 480px; /* giới hạn chiều cao */
-  overflow-y: auto; /* bật cuộn dọc */
-  scrollbar-width: thin; /* Firefox */
+  max-height: 480px; 
+  overflow-y: auto; 
+  scrollbar-width: thin; 
   scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
   scroll-behavior: smooth;
 }
@@ -208,4 +207,7 @@
   color: #ddd;
 }
 
-/* end - category section */
+.unit-AiArt > .finish {
+  display: flex;
+  flex: 4;
+}
