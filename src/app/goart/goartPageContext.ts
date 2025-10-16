@@ -4,6 +4,8 @@ interface GoartPageStatusReactive {
   selectedCategory: string;
   showPreviousArrow: boolean;
   showNextArrow: boolean;
+  setShowPreviousArrow?: (value: boolean) => void;
+  setShowNextArrow?: (value: boolean) => void;
 }
 
 interface GoartPageContextParams {
@@ -28,9 +30,25 @@ interface CategoryDisplayData {
  * Handles category selection, scroll behavior, and effect display logic.
  */
 export default class GoartPageContext {
+  // Scroll behavior constants
+  private static readonly SCROLL_THRESHOLD_PIXELS = 5;
+  private static readonly SCROLL_DISTANCE_PERCENTAGE = 0.6;
+  private static readonly EFFECTS_PREVIEW_LIMIT = 6;
+  
+  // Category constants
+  private static readonly SPECIAL_CATEGORIES = ["Favorite", "All"] as const;
+  private static readonly AVAILABLE_CATEGORIES = [
+    "Favorite",
+    "All",
+    "Popular",
+    "Cartoon",
+    "Sketch",
+    "Watercolor",
+    "Universal",
+  ] as const;
+
   statusReactive: GoartPageStatusReactive;
   listReference: React.RefObject<HTMLUListElement | null>;
-  categories: string[];
 
   /**
    * Constructor for GoartPageContext.
@@ -40,17 +58,6 @@ export default class GoartPageContext {
   constructor({ statusReactive, listReference }: GoartPageContextParams) {
     this.statusReactive = statusReactive;
     this.listReference = listReference;
-    
-    // Initialize categories list
-    this.categories = [
-      "Favorite",
-      "All",
-      "Popular",
-      "Cartoon",
-      "Sketch",
-      "Watercolor",
-      "Universal",
-    ];
   }
 
   /**
@@ -89,15 +96,34 @@ export default class GoartPageContext {
   }
 
   /**
-   * Get categories for display when "All" is selected.
-   * Filters out "Favorite" and "All" categories.
+   * Get all categories for navigation.
    *
-   * @returns List of display categories.
+   * @returns Array of all available categories.
+   */
+  get categories(): readonly string[] {
+    return GoartPageContext.AVAILABLE_CATEGORIES;
+  }
+
+  /**
+   * Get categories for display when "All" is selected.
+   * Filters out special categories (Favorite and All).
+   *
+   * @returns List of regular display categories.
    */
   get displayCategories(): string[] {
-    return this.categories.filter((category: string) => {
-      return category !== "Favorite" && category !== "All";
+    return GoartPageContext.AVAILABLE_CATEGORIES.filter((category: string) => {
+      return !this.isSpecialCategory({ category });
     });
+  }
+
+  /**
+   * Check if a category is a special category.
+   *
+   * @param params - Parameters for this method.
+   * @returns True if category is special (Favorite or All).
+   */
+  isSpecialCategory({ category }: { category: string }): boolean {
+    return (GoartPageContext.SPECIAL_CATEGORIES as readonly string[]).includes(category);
   }
 
   /**
@@ -107,6 +133,30 @@ export default class GoartPageContext {
    */
   get isAllCategoryView(): boolean {
     return this.statusReactive.selectedCategory === "All";
+  }
+
+  /**
+   * Check if list can scroll to previous position.
+   *
+   * @param params - Parameters for this method.
+   * @returns True if can scroll left.
+   */
+  canScrollToPrevious({ element }: { element: HTMLUListElement }): boolean {
+    return element.scrollLeft > GoartPageContext.SCROLL_THRESHOLD_PIXELS;
+  }
+
+  /**
+   * Check if list can scroll to next position.
+   *
+   * @param params - Parameters for this method.
+   * @returns True if can scroll right.
+   */
+  canScrollToNext({ element }: { element: HTMLUListElement }): boolean {
+    const maximumScrollPosition = element.scrollWidth - element.clientWidth;
+    const currentScrollPosition = element.scrollLeft;
+    const remainingScrollDistance = maximumScrollPosition - currentScrollPosition;
+    
+    return remainingScrollDistance > GoartPageContext.SCROLL_THRESHOLD_PIXELS;
   }
 
   /**
@@ -121,13 +171,20 @@ export default class GoartPageContext {
       return;
     }
 
-    const scrollThreshold = 5;
-    const shouldShowPrevious = element.scrollLeft > scrollThreshold;
-    const shouldShowNext = 
-      element.scrollLeft < element.scrollWidth - element.clientWidth - scrollThreshold;
+    const shouldShowPrevious = this.canScrollToPrevious({ element });
+    const shouldShowNext = this.canScrollToNext({ element });
 
-    this.statusReactive.showPreviousArrow = shouldShowPrevious;
-    this.statusReactive.showNextArrow = shouldShowNext;
+    if (this.statusReactive.setShowPreviousArrow) {
+      this.statusReactive.setShowPreviousArrow(shouldShowPrevious);
+    } else {
+      this.statusReactive.showPreviousArrow = shouldShowPrevious;
+    }
+
+    if (this.statusReactive.setShowNextArrow) {
+      this.statusReactive.setShowNextArrow(shouldShowNext);
+    } else {
+      this.statusReactive.showNextArrow = shouldShowNext;
+    }
   }
 
   /**
@@ -154,26 +211,68 @@ export default class GoartPageContext {
   }
 
   /**
-   * Scroll list element in specified direction.
+   * Calculate scroll distance based on element width.
    *
    * @param params - Parameters for this method.
+   * @returns Scroll distance in pixels.
+   */
+  calculateScrollDistance({ element }: { element: HTMLUListElement }): number {
+    return element.clientWidth * GoartPageContext.SCROLL_DISTANCE_PERCENTAGE;
+  }
+
+  /**
+   * Scroll list element to previous position.
+   *
    * @returns void
    */
-  scrollList({ direction }: { direction: "left" | "right" }): void {
+  scrollToPrevious(): void {
     const element = this.currentListElement;
     
     if (!element) {
       return;
     }
 
-    const scrollPercentage = 0.6;
-    const scrollAmount = element.clientWidth * scrollPercentage;
-    const scrollDistance = direction === "left" ? -scrollAmount : scrollAmount;
+    const scrollDistance = this.calculateScrollDistance({ element });
+
+    element.scrollBy({
+      left: -scrollDistance,
+      behavior: "smooth",
+    });
+  }
+
+  /**
+   * Scroll list element to next position.
+   *
+   * @returns void
+   */
+  scrollToNext(): void {
+    const element = this.currentListElement;
+    
+    if (!element) {
+      return;
+    }
+
+    const scrollDistance = this.calculateScrollDistance({ element });
 
     element.scrollBy({
       left: scrollDistance,
       behavior: "smooth",
     });
+  }
+
+  /**
+   * Scroll list element in specified direction.
+   *
+   * @param params - Parameters for this method.
+   * @returns void
+   */
+  scrollList({ direction }: { direction: "left" | "right" }): void {
+    if (direction === "left") {
+      this.scrollToPrevious();
+      return;
+    }
+
+    this.scrollToNext();
   }
 
   /**
@@ -209,12 +308,13 @@ export default class GoartPageContext {
    * @returns Display data for all categories.
    */
   getAllCategoriesDisplayData(): CategoryDisplayData[] {
-    const displayLimit = 6;
-
     return this.displayCategories.map((category: string) => {
       return {
         category,
-        effects: this.getEffectsByCategory({ category, limit: displayLimit }),
+        effects: this.getEffectsByCategory({ 
+          category, 
+          limit: GoartPageContext.EFFECTS_PREVIEW_LIMIT 
+        }),
       };
     });
   }
