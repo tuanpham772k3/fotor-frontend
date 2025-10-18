@@ -19,7 +19,7 @@ export default class GoartPageContext {
   // Scroll behavior constants
   private static readonly SCROLL_THRESHOLD_PIXELS = 5;
   private static readonly SCROLL_DISTANCE_PERCENTAGE = 0.6;
-  
+
   // Category constants
   private static readonly SPECIAL_CATEGORIES = ["Favorite", "All"] as const;
   private static readonly AVAILABLE_CATEGORIES = [
@@ -67,7 +67,7 @@ export default class GoartPageContext {
   setupComponent(): this {
     this.updateArrowVisibility();
     this.attachScrollListener();
-    
+
     return this;
   }
 
@@ -131,7 +131,7 @@ export default class GoartPageContext {
     const maximumScrollPosition = element.scrollWidth - element.clientWidth;
     const currentScrollPosition = element.scrollLeft;
     const remainingScrollDistance = maximumScrollPosition - currentScrollPosition;
-    
+
     return remainingScrollDistance > GoartPageContext.SCROLL_THRESHOLD_PIXELS;
   }
 
@@ -142,7 +142,7 @@ export default class GoartPageContext {
    */
   updateArrowVisibility(): void {
     const element = this.currentListElement;
-    
+
     if (!element) {
       return;
     }
@@ -170,9 +170,9 @@ export default class GoartPageContext {
    */
   attachScrollListener(): () => void {
     const element = this.currentListElement;
-    
+
     if (!element) {
-      return () => {};
+      return () => { };
     }
 
     const handleScroll = () => {
@@ -203,7 +203,7 @@ export default class GoartPageContext {
    */
   scrollToPrevious(): void {
     const element = this.currentListElement;
-    
+
     if (!element) {
       return;
     }
@@ -223,7 +223,7 @@ export default class GoartPageContext {
    */
   scrollToNext(): void {
     const element = this.currentListElement;
-    
+
     if (!element) {
       return;
     }
