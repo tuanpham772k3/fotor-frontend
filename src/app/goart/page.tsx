@@ -4,9 +4,12 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import flaskImage from "@/assets/images/flask.png";
 import "./goart.css";
-import { ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight, ImagePlus, } from "lucide-react";
 import GoartPageContext from "./goartPageContext";
 import ImageGenre from "../components/ImageGenre/ImageGenre";
+import mainImage from "@/assets/images/mainImage.png";
+import starImage from "@/assets/images/star.svg";
+
 
 export default function GoArtPage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
@@ -64,7 +67,7 @@ export default function GoArtPage() {
         <div className="search-effect">
           <input
             type="text"
-            placeholder="Tìm kiếm hiệu ứng"
+            placeholder="Search effects"
             className="search-input"
           />
         </div>
@@ -119,7 +122,39 @@ export default function GoArtPage() {
       </div>
 
       <div className="finish">
-        abc
+        <div className="main-image-container">
+          <Image
+            src={mainImage}
+            alt="Main image"
+            className="main-image"
+          />
+        </div>
+        <h1>Transform Your Photo into Artwork
+          <Image
+            src={starImage}
+            alt="Star image"
+            className="star-image"
+          /></h1>
+        <div className="update-image-container">
+          <button className="update-image-button">
+            <ImagePlus />
+            Update Image
+            <div className="road" />
+            <ChevronDown />
+          </button>
+          <div className="image-format">
+            <span className="image-format-title">Image format:</span>
+            <div className="image-format-options">
+              <div className="bt-category">JPG</div>
+              <div className="bt-category">PNG</div>
+              <div className="bt-category">GIF</div>
+              <div className="bt-category">WEBP</div>
+              <div className="bt-category">SVG</div>
+              <div className="bt-category">TIFF</div>
+              <div className="bt-category">PDF</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
