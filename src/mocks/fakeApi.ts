@@ -85,7 +85,7 @@ export const fakeEffectsData: EffectItem[] = [
   },
 
   // CARTOON
-  ...Array.from({ length: 6 }, (_, i) => ({
+  ...Array.from({ length: 9 }, (_, i) => ({
     _id: `650c2f${i}`,
     title: `Cartoon Effect ${i + 1}`,
     slug: `cartoon-effect-${i + 1}`,

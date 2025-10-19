@@ -1,7 +1,5 @@
-"use client";
-
-import GoArtPage from "./goart/page";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return <GoArtPage />;
+  redirect("/goart");
 }
