@@ -17,9 +17,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
     return (
         <>
-            <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
+            <Header />
             <div className="app-main-content">
-                <Header />
+                <Sidebar />
                 {children}
             </div>
         </>
