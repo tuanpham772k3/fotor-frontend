@@ -5,6 +5,11 @@ interface EffectItem {
   title: string;
   thumbnailUrl: string;
   category: string;
+  meta: {
+    popularity: number;
+    isFavorite: boolean;
+    isPro: boolean;
+  };
 }
 
 interface CategoryDisplayData {

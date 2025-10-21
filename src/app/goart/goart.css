@@ -3,7 +3,7 @@
   height: calc(100vh - 64px);
 
   color: #fff;
-  background-color: #0f0f10; 
+  background-color: #0f0f10;
   padding-block-start: 20px;
   padding-inline: 50px;
 
@@ -17,7 +17,7 @@
   gap: 16px;
   flex: 1;
 
- overflow: hidden;
+  overflow: hidden;
 
   padding: 0 1rem;
 
@@ -125,19 +125,21 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  
+
   /* Enable horizontal scrolling */
   overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
-  
+
   /* Hide scrollbar */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-  
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+
   /* Prevent flex wrap - quan trọng! */
   flex-wrap: nowrap;
-  
+
   /* Add padding for arrow space */
   padding-inline-end: 48px;
 }
@@ -147,7 +149,7 @@
   display: none;
 }
 
-.unit-AiArt>.effects>.list-effects>.category>.item { 
+.unit-AiArt>.effects>.list-effects>.category>.item {
   padding: 6px 10px;
 
   font-size: 13px;
@@ -164,7 +166,7 @@
 
   /* Prevent item shrinking - RẤT QUAN TRỌNG! */
   flex-shrink: 0;
-  
+
   /* Prevent text wrapping - RẤT QUAN TRỌNG! */
   white-space: nowrap;
 
@@ -181,7 +183,7 @@
 .unit-AiArt>.finish {
   background-color: black;
   display: flex;
-  flex: 4;
+  flex: 3;
   border-radius: 12px 12px 0 0;
 
 }

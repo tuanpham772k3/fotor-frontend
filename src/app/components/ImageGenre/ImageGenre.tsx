@@ -4,12 +4,17 @@ import React, { useMemo } from "react";
 import Image from "next/image";
 import ImageGenreContext from "./ImageGenreContext";
 import "./ImageGenre.css";
-
+import diamond from "@/assets/images/diamond.svg";
 interface EffectItem {
     _id: string;
     title: string;
     thumbnailUrl: string;
     category: string;
+    meta: {
+        popularity: number;
+        isFavorite: boolean;
+        isPro: boolean;
+    };
 }
 
 interface ImageGenreProps {
@@ -69,6 +74,17 @@ export default function ImageGenre({
                                                     className="thumb"
                                                     unoptimized
                                                 />
+                                                {item.meta.isPro && (
+                                                    <div className="pro-icon">
+                                                        <Image
+                                                            src={diamond}
+                                                            alt="diamond"
+                                                            width={12}
+                                                            height={12}
+                                                        />
+                                                        <span className="pro-text">PRO</span>
+                                                    </div>
+                                                )}
                                                 <div className="favorite-icon">
                                                     <svg
                                                         width="20"
@@ -121,6 +137,17 @@ export default function ImageGenre({
                                                     className="thumb"
                                                     unoptimized
                                                 />
+                                                {item.meta.isPro && (
+                                                    <div className="pro-icon">
+                                                        <Image
+                                                            src={diamond}
+                                                            alt="diamond"
+                                                            width={12}
+                                                            height={12}
+                                                        />
+                                                        <span className="pro-text">PRO</span>
+                                                    </div>
+                                                )}
                                                 <div className="favorite-icon">
                                                     <svg
                                                         width="20"
