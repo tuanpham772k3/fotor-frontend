@@ -30,6 +30,14 @@ export default class GoartPageContext {
     "Sketch",
     "Watercolor",
     "Universal",
+    "Anime",
+    "Oil Painting",
+    "Pixel Art",
+    "Abstract",
+    "Realistic",
+    "Fantasy",
+    "Cyberpunk",
+    "Vintage",
   ] as const;
 
   statusReactive: GoartPageStatusReactive;
