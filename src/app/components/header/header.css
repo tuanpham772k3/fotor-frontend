@@ -125,3 +125,19 @@
     border-radius: 50%;
     background: #ccc;
 }
+
+/* Responsive search box */
+@media (max-width: 768px) {
+    .unit-header>.left>.searchBox {
+        min-width: auto;
+        max-width: 200px;
+    }
+
+    .unit-header>.left>.searchBox>.menu {
+        display: none;
+    }
+
+    .unit-header>.left>.searchBox>.shortcut {
+        display: none;
+    }
+}
