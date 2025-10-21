@@ -1,16 +1,42 @@
 "use client";
 import Image from "next/image";
 import "./header.css";
-import { ArrowLeft, Grid, Bell, Gift, Plus } from "lucide-react";
+import { ArrowLeft, Grid, Bell, Gift, Plus, Menu } from "lucide-react";
+import { useState, useEffect } from "react";
 
-export default function Header() {
+interface HeaderProps {
+  toggleSidebar?: () => void;
+}
+
+export default function Header({ toggleSidebar }: HeaderProps) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
   return (
     <header className="unit-header">
       {/* LEFT */}
       <div className="left">
-        <button className="backBtn">
-          <ArrowLeft size={18} />
-        </button>
+        {isMobile && (
+          <button className="backBtn mobile-menu-btn" onClick={toggleSidebar}>
+            <Menu size={18} />
+          </button>
+        )}
+
+        {!isMobile && (
+          <button className="backBtn desktop-back-btn">
+            <ArrowLeft size={18} />
+          </button>
+        )}
 
         <Image src="/logo.png" alt="logo" width={28} height={28} />
 
