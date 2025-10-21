@@ -15,11 +15,15 @@ export default function AppLayout({ children }: AppLayoutProps) {
         setSidebarOpen(false);
     };
 
+    const toggleSidebar = () => {
+        setSidebarOpen(!sidebarOpen);
+    };
+
     return (
         <>
-            <Header />
+            <Header toggleSidebar={toggleSidebar} />
             <div className="app-main-content">
-                <Sidebar />
+                <Sidebar sidebarOpen={sidebarOpen} closeSidebar={closeSidebar} />
                 {children}
             </div>
         </>
