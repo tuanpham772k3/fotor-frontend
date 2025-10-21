@@ -1,4 +1,4 @@
-.header {
+.unit-header {
     width: 100%;
     height: 64px;
     background-color: black;
@@ -11,13 +11,13 @@
 }
 
 /* LEFT */
-.header>.left {
+.unit-header>.left {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.header>.left>.backBtn {
+.unit-header>.left>.backBtn {
     background: #1e1e1e;
     border: none;
     color: white;
@@ -31,11 +31,11 @@
     transition: background 0.2s;
 }
 
-.header>.left>.backBtn:hover {
+.unit-header>.left>.backBtn:hover {
     background: #2a2a2a;
 }
 
-.header>.left>.searchBox {
+.unit-header>.left>.searchBox {
     display: flex;
     align-items: center;
     background: #111;
@@ -45,12 +45,12 @@
     min-width: 320px;
 }
 
-.header>.left>.searchBox>.menu {
+.unit-header>.left>.searchBox>.menu {
     color: #ccc;
     font-size: 14px;
 }
 
-.header>.left>.searchBox>.searchInput {
+.unit-header>.left>.searchBox>.searchInput {
     flex: 1;
     background: transparent;
     border: none;
@@ -59,23 +59,23 @@
     font-size: 14px;
 }
 
-.header>.left>.searchBox>.searchInput::placeholder {
+.unit-header>.left>.searchBox>.searchInput::placeholder {
     color: #666;
 }
 
-.header>.left>.searchBox>.shortcut {
+.unit-header>.left>.searchBox>.shortcut {
     color: #666;
     font-size: 12px;
 }
 
 /* RIGHT */
-.header>.right {
+.unit-header>.right {
     display: flex;
     align-items: center;
     gap: 14px;
 }
 
-.header>.right>.promoBtn {
+.unit-header>.right>.promoBtn {
     background: linear-gradient(90deg, #ff8008, #ffb347);
     border: none;
     color: white;
@@ -86,21 +86,21 @@
     transition: opacity 0.2s;
 }
 
-.header>.right>.promoBtn:hover {
+.unit-header>.right>.promoBtn:hover {
     opacity: 0.9;
 }
 
-.header>.right>.icon {
+.unit-header>.right>.icon {
     color: #bbb;
     cursor: pointer;
     transition: color 0.2s;
 }
 
-.header>.right>.icon:hover {
+.unit-header>.right>.icon:hover {
     color: white;
 }
 
-.header>.right>.coin {
+.unit-header>.right>.coin {
     display: flex;
     align-items: center;
     gap: 4px;
@@ -109,17 +109,17 @@
     padding: 4px 8px;
 }
 
-.header>.right>.coin>span {
+.unit-header>.right>.coin>span {
     color: #ddd;
     font-size: 14px;
 }
 
-.header>.right>.coin>.plus {
+.unit-header>.right>.coin>.plus {
     color: #888;
     cursor: pointer;
 }
 
-.header>.right>.avatar {
+.unit-header>.right>.avatar {
     width: 28px;
     height: 28px;
     border-radius: 50%;
