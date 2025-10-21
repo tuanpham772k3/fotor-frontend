@@ -5,7 +5,7 @@ import { ArrowLeft, Grid, Bell, Gift, Plus } from "lucide-react";
 
 export default function Header() {
   return (
-    <header className="header">
+    <header className="unit-header">
       {/* LEFT */}
       <div className="left">
         <button className="backBtn">
