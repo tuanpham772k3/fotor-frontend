@@ -133,16 +133,16 @@
   bottom: 6px;
   left: 6px;
 
-  width: 28px;
-  height: 28px;
+  width: 20px;
+  height: 20px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(211, 211, 211, 0.6);
   backdrop-filter: blur(4px);
-  border-radius: 50%;
+  border-radius: 3px;
 
   color: #fff;
 
@@ -159,8 +159,7 @@
 }
 
 .unit-image-genre>.category-sections>.category-block>.image-grid>.effect-card>.image-wrapper>.favorite-icon:hover {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: var(--th-primary-color);
+  background-color: rgba(168, 168, 168, 0.8);
 }
 
 .unit-image-genre>.category-sections>.category-block>.image-grid>.effect-card>.effect-title {
