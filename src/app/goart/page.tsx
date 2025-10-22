@@ -129,12 +129,12 @@ export default function GoArtPage() {
             className="main-image"
           />
         </div>
-        <h1>Transform Your Photo into Artwork
-          <Image
-            src={starImage}
-            alt="Star image"
-            className="star-image"
-          /></h1>
+        <h1><span>Transform Your Photo into Artwork  <Image
+          src={starImage}
+          alt="Star image"
+          className="star-image"
+        /></span>
+        </h1>
         <div className="update-image-container">
           <button className="update-image-button">
             <ImagePlus />
