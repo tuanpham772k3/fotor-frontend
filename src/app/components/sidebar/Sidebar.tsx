@@ -22,7 +22,7 @@ interface SidebarProps {
 
 const Sidebar = ({ sidebarOpen, closeSidebar }: SidebarProps) => {
   const sidebarItems: SidebarItem[] = [
-    { name: 'Explore', icon: 'fa-solid fa-house', active: false },
+    
     { name: 'AI Photos', icon: 'fa-solid fa-image', active: false },
     { name: 'AI Videos', icon: 'fa-regular fa-file-video', active: false },
     { name: 'AI Design', icon: 'fa-solid fa-pen-ruler', active: false },
