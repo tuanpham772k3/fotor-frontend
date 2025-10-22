@@ -4,9 +4,11 @@
 
   color: #fff;
   background-color: #0f0f10;
-  padding-block-start: 20px;
-  padding-inline: 50px;
+  padding-block-start: 40px;
+  
+  padding-inline: 100px; /* Padding đều 2 bên */
 
+  
   display: flex;
   gap: 20px;
 }
