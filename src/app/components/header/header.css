@@ -36,21 +36,38 @@
 }
 
 .unit-header>.left>.searchBox {
+    position: relative;
     display: flex;
     align-items: center;
     background: #111;
-    padding: 8px 12px;
-    border-radius: 10px;
+    padding: 10px 15px;
+    border-radius: 5px;
     gap: 8px;
     min-width: 320px;
+    border: 1px solid transparent;
+    transition: border-color 0.2s ease;
+    margin-left: 100px;
+}
+
+.unit-header>.left>.searchBox:hover {
+    border-color: #333;
 }
 
 .unit-header>.left>.searchBox>.menu {
     color: #ccc;
     font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.2s;
+}
+
+.unit-header>.left>.searchBox>.menu:hover {
+    color: #fff;
 }
 
 .unit-header>.left>.searchBox>.searchInput {
+    font-weight: 600;
     flex: 1;
     background: transparent;
     border: none;
@@ -64,6 +81,7 @@
 }
 
 .unit-header>.left>.searchBox>.shortcut {
+    font-weight: 600;
     color: #666;
     font-size: 12px;
 }
@@ -126,6 +144,60 @@
     background: #ccc;
 }
 
+/* Dropdown Menu */
+.unit-header>.left>.searchBox>.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    min-width: 200px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    overflow: hidden;
+    animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.unit-header>.left>.searchBox>.dropdown-menu>.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.unit-header>.left>.searchBox>.dropdown-menu>.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.unit-header>.left>.searchBox>.dropdown-menu>.dropdown-item:hover {
+    background: #252525;
+    color: #fff;
+}
+
+.unit-header>.left>.searchBox>.dropdown-menu>.dropdown-item>i {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+    color: var(--primary-color);
+}
+
 /* Responsive search box */
 @media (max-width: 768px) {
     .unit-header>.left>.searchBox {
@@ -139,5 +211,10 @@
 
     .unit-header>.left>.searchBox>.shortcut {
         display: none;
+    }
+    
+    .unit-header>.left>.searchBox>.dropdown-menu {
+        left: -10px;
+        min-width: 180px;
     }
 }
