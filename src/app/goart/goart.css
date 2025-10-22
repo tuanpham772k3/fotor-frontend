@@ -10,15 +10,13 @@
   padding-block-start: 40px;
 
   padding-inline: 70px;
-
-
 }
 
 .unit-AiArt>.effects {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  /* flex: 1; - moved to media queries */
+
 
   overflow: hidden;
 
@@ -27,8 +25,6 @@
   border-radius: 12px 12px 0 0;
 
   background-color: black;
-
-
 }
 
 /* Default styles for all screen sizes */
@@ -42,7 +38,6 @@
 
 @media (max-width: 1200px) {
   .unit-AiArt {
-    display: flex;
     padding-inline: 20px;
   }
 
@@ -54,17 +49,11 @@
     flex: 2;
 
   }
-}
 
-@media (min-width: 1200px) {
-  .unit-AiArt>.effects {
-    flex: 1;
+  .unit-AiArt>.finish>h1 {
+    padding-inline: 30px;
   }
 
-  .unit-AiArt>.finish {
-    flex: 2;
-
-  }
 }
 
 .unit-AiArt>.effects>.header-effects {
@@ -255,12 +244,17 @@
   height: 200px;
 }
 
+.unit-AiArt>.finish .main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .unit-AiArt>.finish>.update-image-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
-
 }
 
 .unit-AiArt>.finish>.update-image-container>.update-image-button {
@@ -291,12 +285,6 @@
   height: 80%;
 }
 
-.unit-AiArt>.finish .main-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .unit-AiArt>.finish .image-format {
   display: flex;
   align-items: center;
@@ -320,4 +308,62 @@
   font-size: 12px;
   border-radius: 2px;
   background-color: #1f1f1f;
+}
+
+
+@media (min-width: 1200px) {
+  .unit-AiArt>.effects {
+    flex: 1;
+  }
+
+  .unit-AiArt>.finish {
+    flex: 2;
+
+  }
+}
+
+@media (max-width: 992px) {
+  .unit-AiArt {
+    display: flex;
+    flex-direction: column-reverse;
+    padding-block-start: 10px;
+  }
+
+  .unit-AiArt>.effects>.header-effects {
+    display: none;
+  }
+
+  .unit-AiArt>.effects>.search-effect {
+    display: none;
+  }
+
+  .unit-AiArt>.finish {
+    gap: 20px;
+  }
+
+  .unit-AiArt>.finish>h1 {
+    padding-inline: 20px;
+  }
+
+  .unit-AiArt>.finish .main-image-container {
+    width: 150px;
+    height: 100px;
+
+  }
+
+  .unit-AiArt>.finish>h1 {
+    font-size: 25px;
+  }
+
+  .unit-AiArt>.finish>.update-image-container>.update-image-button {
+    gap: 5px;
+  }
+
+  .unit-AiArt>.finish>.update-image-container>.update-image-button .road {
+    display: none;
+  }
+
+  .unit-AiArt>.finish>.update-image-container>.update-image-button .angle-down {
+    display: none;
+  }
 }
