@@ -22,7 +22,7 @@ interface SidebarProps {
 
 const Sidebar = ({ sidebarOpen, closeSidebar }: SidebarProps) => {
   const sidebarItems: SidebarItem[] = [
-    
+
     { name: 'AI Photos', icon: 'fa-solid fa-image', active: false },
     { name: 'AI Videos', icon: 'fa-regular fa-file-video', active: false },
     { name: 'AI Design', icon: 'fa-solid fa-pen-ruler', active: false },
@@ -30,7 +30,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }: SidebarProps) => {
     { name: 'Help', icon: 'fa-solid fa-question-circle', active: false },
     { name: 'Feedback', icon: 'fa-solid fa-comments', active: false },
     { name: 'About', icon: 'fa-solid fa-info-circle', active: false },
-    
+
   ];
 
   const settingsItems: SettingsItem[] = [
@@ -43,13 +43,15 @@ const Sidebar = ({ sidebarOpen, closeSidebar }: SidebarProps) => {
     <>
       {sidebarOpen && <div className="sidebar-overlay" onClick={closeSidebar}></div>}
       <div className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
+        {/* Logo - Fixed at top */}
+        <div className="sidebar-logo">
+          <a href="#" className="sidebar-logo-link">
+            <span className="nav-icon"> <i className="fa-solid fa-house"></i> </span>
+          </a>
+        </div>
 
-        <div className="sidebar-content-main">
-          <div className="sidebar-logo">
-            <a href="#" className="sidebar-logo-link">
-             <span className="nav-icon"> <i className="fa-solid fa-house"></i> </span>
-            </a>
-          </div>
+        {/* Main Nav - Scrollable */}
+        <div className="sidebar-nav-scrollable">
           <ul className="sidebar-nav">
             {sidebarItems.map((item, index) => (
               <li key={index} className="nav-item">
@@ -65,6 +67,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }: SidebarProps) => {
           </ul>
         </div>
 
+        {/* Settings - Fixed at bottom */}
         <div className="sidebar-content-settings">
           {/* <div className="sidebar-settings-balance">
             <div className="balance-amount">
