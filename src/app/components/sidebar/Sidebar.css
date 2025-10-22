@@ -7,12 +7,10 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-
+    justify-content: center;
+    align-items: center;
     height: calc(100vh - 64px);
 
-    overflow-y: scroll;
-    scrollbar-width: none;
     z-index: 1000;
 
     transition: transform 0.3s ease;
@@ -61,31 +59,19 @@
     }
 }
 
-.sidebar::-webkit-scrollbar {
-    display: none;
-}
-
-.sidebar>.sidebar-content-main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-   
-    width: 100%;
-}
-
-.sidebar>.sidebar-content-main>.sidebar-logo {
+/* Logo Section - Fixed at top */
+.sidebar>.sidebar-logo {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 1rem 0.75rem;
     width: 70%;
+    flex-shrink: 0;
 
     border-bottom: 1px solid var(--border-color);
 }
 
-.sidebar>.sidebar-content-main>.sidebar-logo .sidebar-logo-link {
+.sidebar>.sidebar-logo .sidebar-logo-link {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,21 +82,36 @@
     color: var(--primary-color);
 }
 
-.sidebar>.sidebar-content-main>.sidebar-logo .sidebar-logo-link:hover {
+.sidebar>.sidebar-logo .sidebar-logo-link:hover {
     background-color: var(--fill-color-2);
 }
 
-.sidebar>.sidebar-content-main>.sidebar-logo .sidebar-logo-link i {
+.sidebar>.sidebar-logo .sidebar-logo-link i {
     font-size: 20px;
     color: #ffffff;
 }
 
-.sidebar>.sidebar-content-settings {
+/* Main Nav Section - Scrollable */
+.sidebar>.sidebar-nav-scrollable {
     flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    width: 100%;
+}
+
+.sidebar>.sidebar-nav-scrollable::-webkit-scrollbar {
+    display: none;
+}
+
+/* Settings Section - Fixed at bottom */
+.sidebar>.sidebar-content-settings {
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     justify-content: end;
-    width: 100%;
+    width: 70%;
+    /* border-top: 1px solid var(--border-color); */
 }
 
 .sidebar>.sidebar-content-settings>.sidebar-settings-balance {
