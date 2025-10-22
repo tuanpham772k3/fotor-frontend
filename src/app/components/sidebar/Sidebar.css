@@ -23,7 +23,7 @@
 }
 
 /* Responsive: Hide sidebar on mobile */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .sidebar {
         position: fixed;
         left: 0;
