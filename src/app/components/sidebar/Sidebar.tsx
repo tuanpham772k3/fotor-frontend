@@ -22,16 +22,21 @@ interface SidebarProps {
 
 const Sidebar = ({ sidebarOpen, closeSidebar }: SidebarProps) => {
   const sidebarItems: SidebarItem[] = [
-    { name: 'Explore', icon: 'fa-light fa-house', active: false },
-    { name: 'Create', icon: 'fa-light fa-arrows-rotate', active: false },
-    { name: 'Models', icon: 'fa-light fa-robot', active: false },
-    { name: 'API Apps', icon: 'fa-solid fa-rocket', active: false },
+    { name: 'Explore', icon: 'fa-solid fa-house', active: false },
+    { name: 'AI Photos', icon: 'fa-solid fa-image', active: false },
+    { name: 'AI Videos', icon: 'fa-regular fa-file-video', active: false },
+    { name: 'AI Design', icon: 'fa-solid fa-pen-ruler', active: false },
+    { name: 'Projects', icon: 'fa-solid fa-folder-open', active: false },
+    { name: 'Help', icon: 'fa-solid fa-question-circle', active: false },
+    { name: 'Feedback', icon: 'fa-solid fa-comments', active: false },
+    { name: 'About', icon: 'fa-solid fa-info-circle', active: false },
+    
   ];
 
   const settingsItems: SettingsItem[] = [
-    { name: '', icon: 'fa-light fa-gift' },
-    { name: '', icon: 'fa-light fa-bell' },
-    { name: '', icon: 'fa-light fa-table-cells-large' },
+    // { name: '', icon: 'fa-solid fa-gift' },
+    // { name: '', icon: 'fa-solid fa-bell' },
+    { name: 'Settings', icon: 'fa-solid fa-gear' },
   ];
 
   return (
@@ -41,7 +46,9 @@ const Sidebar = ({ sidebarOpen, closeSidebar }: SidebarProps) => {
 
         <div className="sidebar-content-main">
           <div className="sidebar-logo">
-            <Image src="/assets/images/logo.png" alt="logo" width={40} height={40} />
+            <a href="#" className="sidebar-logo-link">
+             <span className="nav-icon"> <i className="fa-solid fa-house"></i> </span>
+            </a>
           </div>
           <ul className="sidebar-nav">
             {sidebarItems.map((item, index) => (
@@ -59,7 +66,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }: SidebarProps) => {
         </div>
 
         <div className="sidebar-content-settings">
-          <div className="sidebar-settings-balance">
+          {/* <div className="sidebar-settings-balance">
             <div className="balance-amount">
               <div className="balance-amount-icon">
                 <Image src="/assets/images/dollar.png" alt="dollar" width={20} height={20} />
@@ -79,7 +86,7 @@ const Sidebar = ({ sidebarOpen, closeSidebar }: SidebarProps) => {
               width={40}
               height={40}
             />
-          </div>
+          </div> */}
           <ul className="sidebar-nav">
             {settingsItems.map((item, index) => (
               <li key={index} className="nav-item">
@@ -96,7 +103,6 @@ const Sidebar = ({ sidebarOpen, closeSidebar }: SidebarProps) => {
             ))}
           </ul>
         </div>
-
       </div>
     </>
   );
