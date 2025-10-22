@@ -2,7 +2,7 @@
 import Image from "next/image";
 import "./header.css";
 import { ArrowLeft, Grid, Bell, Gift, Plus, Menu } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface HeaderProps {
   toggleSidebar?: () => void;
@@ -10,6 +10,8 @@ interface HeaderProps {
 
 export default function Header({ toggleSidebar }: HeaderProps) {
   const [isMobile, setIsMobile] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -21,6 +23,22 @@ export default function Header({ toggleSidebar }: HeaderProps) {
 
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
 
   return (
     <header className="unit-header">
@@ -38,10 +56,37 @@ export default function Header({ toggleSidebar }: HeaderProps) {
           </button>
         )}
 
-        <Image src="/logo.png" alt="logo" width={28} height={28} />
+        <Image 
+        src="https://pub-static.fotor.com/static/web/lib/fotor-bundle/9d3a9d230faf9f901b16.svg"
+         alt="logo" width={70} height={70}
+          />
 
-        <div className="searchBox">
-          <span className="menu">Tools ▾</span>
+        <div className="searchBox" ref={dropdownRef}>
+          <span className="menu" onClick={toggleDropdown}>
+            Tools ▾
+          </span>
+          
+          {isDropdownOpen && (
+            <div className="dropdown-menu">
+              <a href="#" className="dropdown-item">
+                <i className="fa-solid fa-wrench"></i>
+                Tools
+              </a>
+              <a href="#" className="dropdown-item">
+                <i className="fa-solid fa-users"></i>
+                Community
+              </a>
+              <a href="#" className="dropdown-item">
+                <i className="fa-solid fa-layer-group"></i>
+                Templates
+              </a>
+              <a href="#" className="dropdown-item">
+                <i className="fa-solid fa-book"></i>
+                Library
+              </a>
+            </div>
+          )}
+          
           <input
             type="text"
             placeholder="Search"
