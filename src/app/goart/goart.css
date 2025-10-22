@@ -1,16 +1,16 @@
 .unit-AiArt {
-  width: 100%;
+  display: flex;
+  gap: 20px;
+
   height: calc(100vh - 64px);
 
+  overflow: hidden;
   color: #fff;
   background-color: #0f0f10;
   padding-block-start: 40px;
-  
-  padding-inline: 100px; /* Padding đều 2 bên */
 
-  
-  display: flex;
-  gap: 20px;
+  padding-inline: 70px;
+
 }
 
 .unit-AiArt>.effects {
@@ -242,9 +242,15 @@
 
   font-size: 16px;
   font-weight: 600;
+  cursor: pointer;
 
   background-color: #8a99f8;
 }
+
+.unit-AiArt>.finish>.update-image-container>.update-image-button:hover {
+  background-color: #6b7fd7;
+}
+
 
 .unit-AiArt>.finish>.update-image-container>.update-image-button .road {
   border-left: 1px solid rgb(0, 0, 0);
@@ -279,5 +285,5 @@
   padding: 2px 4px;
   font-size: 12px;
   border-radius: 2px;
-  background-color: #383838;
+  background-color: #1f1f1f;
 }
