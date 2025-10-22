@@ -164,6 +164,7 @@
         opacity: 0;
         transform: translateY(-10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -199,7 +200,7 @@
 }
 
 /* Responsive search box */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .unit-header>.left>.searchBox {
         min-width: auto;
         max-width: 200px;
@@ -212,7 +213,7 @@
     .unit-header>.left>.searchBox>.shortcut {
         display: none;
     }
-    
+
     .unit-header>.left>.searchBox>.dropdown-menu {
         left: -10px;
         min-width: 180px;
