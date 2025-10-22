@@ -140,7 +140,7 @@ export default function GoArtPage() {
             <ImagePlus />
             Update Image
             <div className="road" />
-            <ChevronDown />
+            <ChevronDown className="angle-down" />
           </button>
           <div className="image-format">
             <span className="image-format-title">Image format:</span>
