@@ -204,6 +204,7 @@
     .unit-header>.left>.searchBox {
         min-width: auto;
         max-width: 200px;
+        margin-left: 40px;
     }
 
     .unit-header>.left>.searchBox>.menu {
@@ -217,5 +218,30 @@
     .unit-header>.left>.searchBox>.dropdown-menu {
         left: -10px;
         min-width: 180px;
+    }
+
+
+}
+
+@media (max-width: 768px) {
+    .unit-header>.right>.promoBtn {
+        display: none;
+    }
+}
+
+@media (max-width: 640px) {
+    .unit-header>.right>.icon {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .unit-header>.left>.searchBox {
+        min-width: auto;
+        margin-left: 10px;
+    }
+
+    .unit-header>.right>.icon {
+        display: none;
     }
 }
