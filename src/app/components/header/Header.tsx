@@ -64,7 +64,7 @@ export default function Header({ toggleSidebar }: HeaderProps) {
 
         <div className="searchBox" ref={dropdownRef}>
           <span className="menu" onClick={toggleDropdown}>
-            Tools ▾
+            Tools <span> ▾</span>
           </span>
 
           {isDropdownOpen && (
