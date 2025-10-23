@@ -42,6 +42,8 @@
     background: #111;
     padding: 10px 15px;
     border-radius: 5px;
+    width: auto;
+max-width: 300px;
     gap: 8px;
     border: 1px solid transparent;
     transition: border-color 0.2s ease;
@@ -53,6 +55,7 @@
 }
 
 .unit-header>.left>.searchBox>.menu {
+    display: flex;
     color: #ccc;
     font-size: 14px;
     font-weight: 600;
@@ -157,7 +160,7 @@
     background: #1a1a1a;
     border: 1px solid #333;
     border-radius: 8px;
-    min-width: 200px;
+    width: auto;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     z-index: 1000;
     overflow: hidden;
@@ -208,13 +211,9 @@
 @media (max-width: 992px) {
     .unit-header>.left>.searchBox {
         min-width: auto;
-        max-width: 300px;
-        margin-left: 40px;
+        margin-left: 20px;
     }
 
-    .unit-header>.left>.searchBox>.menu {
-      width: 100px;
-    }
 
     .unit-header>.left>.searchBox>.shortcut {
         display: none;
@@ -226,19 +225,28 @@
     }
 }
 
-@media (max-width: 768px) {
+
+@media (max-width: 850px) {
     .unit-header>.right>.promoBtn {
         display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .unit-header>.left>.searchBox {
+        min-width: auto;
+    }
+
+    .unit-header>.left>.searchBox>.menu {
+        min-width: auto
     }
 
     .unit-header>.left>.searchBox {
         min-width: auto;
- 
+        margin-left: 10px;
+        width: 250px;
     }
 
-    .unit-header>.left>.searchBox>.menu {
-        width: 150px;
-    }
 }
 
 @media (max-width: 640px) {
@@ -248,6 +256,13 @@
 }
 
 @media (max-width: 576px) {
+  
+    .unit-header>.left>.searchBox {
+        min-width: auto;
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 180px;
+    }
     
     .unit-header>.left>.searchBox>.menu {
         display: none;
@@ -261,4 +276,6 @@
     .unit-header>.right>.icon {
         display: none;
     }
+
+  
 }
