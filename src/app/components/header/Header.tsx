@@ -3,6 +3,7 @@ import Image from "next/image";
 import "./header.css";
 import { ArrowLeft, Grid, Bell, Gift, Plus, Menu } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import leafImage from "../../../assets/images/leaf.svg";
 
 interface HeaderProps {
   toggleSidebar?: () => void;
@@ -63,7 +64,7 @@ export default function Header({ toggleSidebar }: HeaderProps) {
 
         <div className="searchBox" ref={dropdownRef}>
           <span className="menu" onClick={toggleDropdown}>
-            Tools ▾
+            Tools <span> ▾</span>
           </span>
 
           {isDropdownOpen && (
@@ -103,12 +104,15 @@ export default function Header({ toggleSidebar }: HeaderProps) {
         </button>
         <Grid className="icon" size={20} />
         <Bell className="icon" size={20} />
-        <Gift className="icon" size={20} />
+        <Gift className="icon" size={ 20} />
         <div className="coin">
-          <span>6</span>
+          <span className="leaf"> <Image src={leafImage} alt="coin" width={14} height={14} />
+           6</span>
           <Plus size={14} className="plus" />
         </div>
-        <div className="avatar"></div>
+        <div className="avatar"> <Image src={
+          "https://i.pinimg.com/736x/99/e3/2b/99e32b8046bc1e8549a9051affebac90.jpg"
+        } alt="avatar" width={30} height={30} className="avatar-image" /></div>
       </div>
     </header>
   );
