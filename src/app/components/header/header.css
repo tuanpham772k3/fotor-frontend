@@ -43,7 +43,6 @@
     padding: 10px 15px;
     border-radius: 5px;
     gap: 8px;
-    min-width: 320px;
     border: 1px solid transparent;
     transition: border-color 0.2s ease;
     margin-left: 100px;
@@ -127,6 +126,12 @@
     padding: 4px 8px;
 }
 
+.unit-header>.right>.coin>.leaf {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
 .unit-header>.right>.coin>span {
     color: #ddd;
     font-size: 14px;
@@ -203,12 +208,12 @@
 @media (max-width: 992px) {
     .unit-header>.left>.searchBox {
         min-width: auto;
-        max-width: 200px;
+        max-width: 300px;
         margin-left: 40px;
     }
 
     .unit-header>.left>.searchBox>.menu {
-        display: none;
+      width: 100px;
     }
 
     .unit-header>.left>.searchBox>.shortcut {
@@ -219,13 +224,20 @@
         left: -10px;
         min-width: 180px;
     }
-
-
 }
 
 @media (max-width: 768px) {
     .unit-header>.right>.promoBtn {
         display: none;
+    }
+
+    .unit-header>.left>.searchBox {
+        min-width: auto;
+ 
+    }
+
+    .unit-header>.left>.searchBox>.menu {
+        width: 150px;
     }
 }
 
@@ -236,6 +248,11 @@
 }
 
 @media (max-width: 576px) {
+    
+    .unit-header>.left>.searchBox>.menu {
+        display: none;
+    }
+
     .unit-header>.left>.searchBox {
         min-width: auto;
         margin-left: 10px;
