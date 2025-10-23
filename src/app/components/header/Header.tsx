@@ -110,7 +110,9 @@ export default function Header({ toggleSidebar }: HeaderProps) {
            6</span>
           <Plus size={14} className="plus" />
         </div>
-        <div className="avatar"></div>
+        <div className="avatar"> <Image src={
+          "https://i.pinimg.com/736x/99/e3/2b/99e32b8046bc1e8549a9051affebac90.jpg"
+        } alt="avatar" width={30} height={30} className="avatar-image" /></div>
       </div>
     </header>
   );
