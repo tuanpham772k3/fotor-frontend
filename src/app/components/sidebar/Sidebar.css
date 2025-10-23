@@ -22,43 +22,6 @@
     display: none;
 }
 
-/* Responsive: Hide sidebar on mobile */
-@media (max-width: 992px) {
-    .sidebar {
-        position: fixed;
-        left: 0;
-        top: 64px;
-        transform: translateX(-100%);
-    }
-
-    .sidebar.open {
-        transform: translateX(0);
-        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .sidebar-overlay {
-        display: block;
-        position: fixed;
-        top: 64px;
-        left: 0;
-        width: 100%;
-        height: calc(100vh - 64px);
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-        animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-
-        to {
-            opacity: 1;
-        }
-    }
-}
-
 /* Logo Section - Fixed at top */
 .sidebar>.sidebar-logo {
     display: flex;
@@ -217,4 +180,42 @@
     opacity: 1;
     font-size: 1.1rem;
     color: #c5c5c5;
+}
+
+
+/* Responsive: Hide sidebar on mobile */
+@media (max-width: 992px) {
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 64px;
+        transform: translateX(-100%);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .sidebar-overlay {
+        display: block;
+        position: fixed;
+        top: 64px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 64px);
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
 }
