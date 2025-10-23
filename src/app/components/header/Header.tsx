@@ -15,7 +15,7 @@ export default function Header({ toggleSidebar }: HeaderProps) {
 
   useEffect(() => {
     const checkScreenSize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(window.innerWidth <= 992);
     };
 
     checkScreenSize();
@@ -56,16 +56,16 @@ export default function Header({ toggleSidebar }: HeaderProps) {
           </button>
         )}
 
-        <Image 
-        src="https://pub-static.fotor.com/static/web/lib/fotor-bundle/9d3a9d230faf9f901b16.svg"
-         alt="logo" width={70} height={70}
-          />
+        <Image
+          src="https://pub-static.fotor.com/static/web/lib/fotor-bundle/9d3a9d230faf9f901b16.svg"
+          alt="logo" width={70} height={70}
+        />
 
         <div className="searchBox" ref={dropdownRef}>
           <span className="menu" onClick={toggleDropdown}>
             Tools ▾
           </span>
-          
+
           {isDropdownOpen && (
             <div className="dropdown-menu">
               <a href="#" className="dropdown-item">
@@ -86,7 +86,7 @@ export default function Header({ toggleSidebar }: HeaderProps) {
               </a>
             </div>
           )}
-          
+
           <input
             type="text"
             placeholder="Search"

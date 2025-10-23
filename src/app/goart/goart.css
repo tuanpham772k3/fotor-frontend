@@ -10,15 +10,14 @@
   padding-block-start: 40px;
 
   padding-inline: 70px;
-
 }
 
 .unit-AiArt>.effects {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  flex: 1;
 
+  flex: 1;
   overflow: hidden;
 
   padding: 0 1rem;
@@ -28,6 +27,7 @@
   background-color: black;
 }
 
+ 
 .unit-AiArt>.effects>.header-effects {
   margin: 16px 16px 0;
 }
@@ -182,35 +182,31 @@
   border: 1px solid var(--th-primary-color);
 }
 
-.unit-AiArt>.finish {
-  background-color: black;
-  display: flex;
-  flex: 3;
-  border-radius: 12px 12px 0 0;
-
-}
-
 /* finish */
 .unit-AiArt>.finish {
   display: flex;
   flex-direction: column;
   gap: 35px;
+  flex: 3;
   justify-content: center;
   align-items: center;
 
+  border-radius: 12px 12px 0 0;
+
   width: 100%;
   height: 100%;
+  background-color: black;
 }
 
 .unit-AiArt>.finish>h1 {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   gap: 10px;
 }
 
 .unit-AiArt>.finish .star-image {
-
   width: 25px;
   height: 25px;
   filter: brightness(0) invert(1);
@@ -221,12 +217,17 @@
   height: 200px;
 }
 
+.unit-AiArt>.finish .main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .unit-AiArt>.finish>.update-image-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
-
 }
 
 .unit-AiArt>.finish>.update-image-container>.update-image-button {
@@ -257,16 +258,11 @@
   height: 80%;
 }
 
-.unit-AiArt>.finish .main-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .unit-AiArt>.finish .image-format {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   gap: 6px;
 }
 
@@ -276,7 +272,8 @@
 
 .unit-AiArt>.finish .image-format>.image-format-options {
   display: flex;
-  gap: 10px;
+  gap: 10px; 
+  flex-wrap: wrap;
 }
 
 .unit-AiArt>.finish .image-format>.image-format-options>.bt-category {
@@ -286,4 +283,120 @@
   font-size: 12px;
   border-radius: 2px;
   background-color: #1f1f1f;
+}
+
+@media (max-width: 1200px) {
+  .unit-AiArt {
+    padding-inline: 20px;
+  }
+
+  .unit-AiArt>.effects {
+    flex: 1;
+  }
+
+  .unit-AiArt>.finish {
+    flex: 2;
+
+  }
+
+  .unit-AiArt>.finish>h1 {
+    padding-inline: 30px;
+  }
+
+}
+
+@media (min-width: 1200px) {
+  .unit-AiArt>.effects {
+    flex: 1;
+  }
+
+  .unit-AiArt>.finish {
+    flex: 3;
+
+  }
+}
+
+@media (max-width: 992px) {
+  .unit-AiArt {
+    display: flex;
+    flex-direction: column-reverse;
+    padding-block-start: 10px;
+  }
+  .unit-AiArt>.effects {
+    gap: 10px;
+  }
+
+  .unit-AiArt>.effects>.header-effects {
+    display: none;
+  }
+
+  .unit-AiArt>.effects>.search-effect {
+    display: none;
+  }
+
+  .unit-AiArt>.finish {
+    gap: 20px;
+  }
+
+  .unit-AiArt>.finish>h1 {
+    padding-inline: 20px;
+  }
+
+  .unit-AiArt>.finish .main-image-container {
+    width: 150px;
+    height: 100px;
+
+  }
+
+  .unit-AiArt>.finish>h1 {
+    font-size: 25px;
+  }
+
+  .unit-AiArt>.finish>.update-image-container>.update-image-button {
+    gap: 5px;
+  }
+
+  .unit-AiArt>.finish>.update-image-container>.update-image-button .road {
+    display: none;
+  }
+
+  .unit-AiArt>.finish>.update-image-container>.update-image-button .angle-down {
+    display: none;
+  }
+
+  .unit-AiArt>.effects {
+    flex: 1;
+  }
+
+  .unit-AiArt>.finish {
+    flex: 4;
+  }
+  .unit-AiArt>.finish>.main-image-container {
+    width: 300px;
+    height: 200px;
+  }
+  
+  .unit-AiArt>.finish .main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 480px) {
+  .unit-AiArt {
+    padding-inline: 0rem;
+  }
+  .unit-AiArt>.effects {
+  padding-inline: 1rem;
+ 
+  }
+
+  .unit-AiArt>.finish {
+padding-inline: 0rem;
+  }
+  .unit-AiArt>.finish .image-format {
+  padding-inline: 10px;
+  
+  }
 }
