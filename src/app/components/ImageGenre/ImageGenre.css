@@ -1,8 +1,10 @@
 .unit-image-genre {
   width: 100%;
   height: 100%;
+
   display: flex;
   flex-direction: column;
+
   overflow: hidden;
 }
 
@@ -10,17 +12,15 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-
   flex: 1;
+
   min-height: 0;
+
   box-sizing: border-box;
+
   overflow-y: auto;
   scroll-behavior: smooth;
-
-  /* Ẩn scrollbar cho Firefox */
   scrollbar-width: none;
-
-  /* Ẩn scrollbar cho Chrome, Safari, Edge */
   -ms-overflow-style: none;
 }
 
@@ -47,10 +47,11 @@
 
 .unit-image-genre>.category-sections>.category-block>.category-header>.see-all {
   font-size: 13px;
-  color: var(--th-primary-color);
-  background: none;
   border: none;
   cursor: pointer;
+
+  color: var(--th-primary-color);
+  background: none;
 }
 
 .unit-image-genre>.category-sections>.category-block>.image-grid {
@@ -67,8 +68,10 @@
 }
 
 .unit-image-genre>.category-sections>.category-block>.image-grid>.effect-card>.image-wrapper {
-  position: relative;
   width: 100%;
+  
+  position: relative;
+  
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 8px;
